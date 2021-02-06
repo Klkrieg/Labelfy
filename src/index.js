@@ -1,9 +1,9 @@
-import { Divider } from '@material-ui/core';
+//import 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const App = () => {
-  return <h1>Hello World!</h1>;
-};
+import App from './App.jsx';
+
+if (module.hot) module.hot.accept();
 
 ReactDOM.render(<App />, document.getElementById('root'));
