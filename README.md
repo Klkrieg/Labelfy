@@ -1,5 +1,10 @@
-#WElCOME TO LABEL LOVERS
-###An app that helps you make spotify playlists based on the record labels you love!
+#
+
+WElCOME TO LABEL LOVERS
+
+###
+
+An app that helps you make spotify playlists based on the record labels you love!
 
 To begin, fork this project and clone to your machine.
 
