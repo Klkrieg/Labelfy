@@ -1,52 +1,37 @@
+const expect = require('chai').expect;
+const request = require('supertest');
 const express = require('express');
 
-describe('Our application', function () {
-  var app;
-  var date;
+//chai.use('chaihttp');
+function createApp() {
+  app = express();
 
-  this.timeout(5000);
+  return app;
+}
+
+describe('Our server', function () {
+  var app;
 
   before(function (done) {
-    app = express();
-    app.listen(3000, function (err) {
+    app = createApp();
+    app.listen(function (err) {
       if (err) {
-        return done(err);
+        done(err);
       }
       done();
     });
   });
 
-  beforeEach(function () {
-    date = new Date();
-  });
-
-  after(function () {
-    console.log('All of our tests are complete');
-  });
-
-  afterEach(function () {
-    //console.log(`The date for that one was ${date}.`);
-  });
-
-  it('understands basic math', function (done) {
-    if (2 == 1) {
-      throw new Error('not sure how that happened');
-    }
-    done();
-  });
-
-  it('Should understand booleans', function () {});
-
-  describe('Going Deeper', function () {
-    before(() => {
-      console.log('deeper');
-    });
-
-    it('should perform basic math', function (done) {
-      if (1 + 1 != 2) {
-        throw new Error('oops');
-      }
-      done();
-    });
+  it('should redirect to spotify', function () {
+    request(app)
+      .get('http://localhost:8080/login')
+      .end(function (err, res) {
+        // expect(res).to.redirectTo(/https:\/\/accounts\.spotify\.com\/./);
+        expect(res).to.have.param('client_id');
+        expect(res).to.have.param('response_type');
+        expect(res).to.have.param('scope');
+        expect(res).to.have.param('redirect_ui');
+        done(); // <= Call done to signal callback end
+      });
   });
 });
